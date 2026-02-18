@@ -27,8 +27,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -223,7 +223,7 @@ public class RecurrenceOptionCreator extends FrameLayout
         return SublimeRecurrencePicker.RecurrenceOption.CUSTOM;
     }
 
-    private class RecurrenceModel implements Parcelable {
+    private static class RecurrenceModel implements Parcelable {
 
         // Should match EventRecurrence.DAILY, etc
         static final int FREQ_DAILY = 0;
@@ -321,7 +321,20 @@ public class RecurrenceOptionCreator extends FrameLayout
         }
 
         public RecurrenceModel(Parcel in) {
-            readFromParcel(in);
+            freq = in.readInt();
+            interval = in.readInt();
+            end = in.readInt();
+            endDate = new Time();
+            endDate.year = in.readInt();
+            endDate.month = in.readInt();
+            endDate.monthDay = in.readInt();
+            endCount = in.readInt();
+            weeklyByDayOfWeek = in.createBooleanArray();
+            monthlyRepeat = in.readInt();
+            monthlyByMonthDay = in.readInt();
+            monthlyByDayOfWeek = in.readInt();
+            monthlyByNthDayOfWeek = in.readInt();
+            recurrenceState = in.readInt();
         }
 
         @Override
@@ -341,26 +354,9 @@ public class RecurrenceOptionCreator extends FrameLayout
             dest.writeInt(recurrenceState);
         }
 
-        private void readFromParcel(Parcel in) {
-            freq = in.readInt();
-            interval = in.readInt();
-            end = in.readInt();
-            endDate = new Time();
-            endDate.year = in.readInt();
-            endDate.month = in.readInt();
-            endDate.monthDay = in.readInt();
-            endCount = in.readInt();
-            in.readBooleanArray(weeklyByDayOfWeek);
-            monthlyRepeat = in.readInt();
-            monthlyByMonthDay = in.readInt();
-            monthlyByDayOfWeek = in.readInt();
-            monthlyByNthDayOfWeek = in.readInt();
-            recurrenceState = in.readInt();
-        }
-
         @SuppressWarnings("all")
         // suppress unused and hiding
-        public final Parcelable.Creator<RecurrenceModel> CREATOR = new Creator<RecurrenceModel>() {
+        public static final Parcelable.Creator<RecurrenceModel> CREATOR = new Creator<RecurrenceModel>() {
 
             public RecurrenceModel createFromParcel(Parcel in) {
                 return new RecurrenceModel(in);
@@ -372,7 +368,7 @@ public class RecurrenceOptionCreator extends FrameLayout
         };
     }
 
-    class minMaxTextWatcher implements TextWatcher {
+    abstract class minMaxTextWatcher implements TextWatcher {
         private int mMin;
         private int mMax;
         private int mDefault;
@@ -415,8 +411,7 @@ public class RecurrenceOptionCreator extends FrameLayout
         /**
          * Override to be called after each key stroke
          */
-        void onChange(int value) {
-        }
+        abstract void onChange(int value);
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -769,7 +764,8 @@ public class RecurrenceOptionCreator extends FrameLayout
         freqAdapter.setDropDownViewResource(R.layout.roc_spinner_dropdown_item);
         mFreqSpinner.setAdapter(freqAdapter);
 
-        Drawable freqSpinnerBg = ContextCompat.getDrawable(getContext(), R.drawable.abc_spinner_mtrl_am_alpha);
+        // abc_spinner_mtrl_am_alpha is internal to appcompat, using a standard drawable if not found
+        Drawable freqSpinnerBg = ContextCompat.getDrawable(getContext(), androidx.appcompat.R.drawable.abc_spinner_mtrl_am_alpha);
         PorterDuffColorFilter cfFreqSpinner
                 = new PorterDuffColorFilter(SUtils.COLOR_TEXT_PRIMARY_INVERSE,
                 PorterDuff.Mode.SRC_IN);
@@ -1534,4 +1530,3 @@ public class RecurrenceOptionCreator extends FrameLayout
         }
     }
 }
-

@@ -9,8 +9,8 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -83,17 +83,17 @@ public class RecurrenceEndDatePicker extends FrameLayout {
         this(context, null);
     }
 
-    public RecurrenceEndDatePicker(Context context, AttributeSet attrs) {
+    public RecurrenceEndDatePicker(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, R.attr.spDatePickerStyle);
     }
 
-    public RecurrenceEndDatePicker(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RecurrenceEndDatePicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initializeLayout(attrs, defStyleAttr, R.style.SublimeDatePickerStyle);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public RecurrenceEndDatePicker(Context context, AttributeSet attrs,
+    public RecurrenceEndDatePicker(Context context, @Nullable AttributeSet attrs,
                                    int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initializeLayout(attrs, defStyleAttr, defStyleRes);

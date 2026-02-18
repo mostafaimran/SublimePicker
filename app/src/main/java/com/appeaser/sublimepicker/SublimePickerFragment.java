@@ -17,8 +17,8 @@
 package com.appeaser.sublimepicker;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,7 +100,7 @@ public class SublimePickerFragment extends DialogFragment {
         }*/
 
         mSublimePicker = (SublimePicker) getActivity()
-                .getLayoutInflater().inflate(R.layout.sublime_picker, container);
+                .getLayoutInflater().inflate(com.appeaser.sublimepickerlibrary.R.layout.sublime_picker, container);
 
         // Retrieve SublimeOptions
         Bundle arguments = getArguments();

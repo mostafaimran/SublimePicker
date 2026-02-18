@@ -22,9 +22,9 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import com.appeaser.sublimepickerlibrary.R;
 
@@ -32,7 +32,7 @@ import com.appeaser.sublimepickerlibrary.R;
  * Indicator used for selected year in YearPickerView
  * Needs fixing.
  */
-class CircularIndicatorTextView extends TextView {
+class CircularIndicatorTextView extends AppCompatTextView {
     private static final int SELECTED_CIRCLE_ALPHA = 60;
 
     private final Paint mCirclePaint = new Paint();
@@ -88,7 +88,7 @@ class CircularIndicatorTextView extends TextView {
             final int width = getWidth();
             final int height = getHeight();
             int radius = Math.min(width, height) / 2;
-            canvas.drawCircle(width / 2, height / 2, radius, mCirclePaint);
+            canvas.drawCircle(width / 2f, height / 2f, radius, mCirclePaint);
         }
     }
 

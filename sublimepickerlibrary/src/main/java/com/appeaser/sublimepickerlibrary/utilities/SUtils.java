@@ -30,9 +30,9 @@ import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.view.ViewCompat;
+import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.ViewCompat;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.HapticFeedbackConstants;
@@ -78,12 +78,12 @@ public class SUtils {
 
     public static void initializeResources(Context context) {
         TypedArray a = context.obtainStyledAttributes(
-                new int[]{R.attr.colorAccent, R.attr.colorControlHighlight,
-                        R.attr.colorControlActivated,
-                        R.attr.colorButtonNormal, android.R.attr.textColorPrimary,
+                new int[]{androidx.appcompat.R.attr.colorAccent, androidx.appcompat.R.attr.colorControlHighlight,
+                        androidx.appcompat.R.attr.colorControlActivated,
+                        androidx.appcompat.R.attr.colorButtonNormal, android.R.attr.textColorPrimary,
                         android.R.attr.textColorPrimaryInverse,
-                        R.attr.colorPrimary,
-                        R.attr.colorPrimaryDark,
+                        androidx.appcompat.R.attr.colorPrimary,
+                        androidx.appcompat.R.attr.colorPrimaryDark,
                         android.R.attr.textColorSecondary,
                         android.R.attr.colorBackground,
                         android.R.attr.textColorSecondaryInverse});

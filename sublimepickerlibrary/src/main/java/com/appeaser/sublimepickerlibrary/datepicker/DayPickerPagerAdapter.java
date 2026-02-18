@@ -19,18 +19,18 @@ package com.appeaser.sublimepickerlibrary.datepicker;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.appeaser.sublimepickerlibrary.R;
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
+
 import com.appeaser.sublimepickerlibrary.utilities.Config;
 import com.appeaser.sublimepickerlibrary.utilities.SUtils;
 
@@ -79,7 +79,7 @@ class DayPickerPagerAdapter extends PagerAdapter {
         mCalendarViewId = calendarViewId;
 
         final TypedArray ta = context.obtainStyledAttributes(new int[]{
-                R.attr.colorControlHighlight});
+                androidx.appcompat.R.attr.colorControlHighlight});
         mDayHighlightColor = ta.getColorStateList(0);
         ta.recycle();
     }
@@ -363,9 +363,9 @@ class DayPickerPagerAdapter extends PagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        final SimpleMonthView v = mItems.get(position).calendar;
-        if (v != null) {
-            return v.getTitle();
+        final ViewHolder holder = mItems.get(position);
+        if (holder != null && holder.calendar != null) {
+            return holder.calendar.getTitle();
         }
         return null;
     }
