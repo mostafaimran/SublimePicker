@@ -120,6 +120,7 @@
 
     <string name="cd_positive_component">ok, set date/time</string>
     <string name="cd_negative_component">Cancel, do not set date/time</string>
+    <string name="cd_recurrence_picker">recurrence picker</string>
 
     <string name="recurrence_heading">repeat options</string>
     <string name="recurrence_does_not_repeat">does not repeat</string>
